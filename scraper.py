@@ -34,7 +34,7 @@ def scraper():
             summary=i.find("div",class_="joblnk serachjoblnk").find_all("span",class_="black")[1].previous_element.getText().strip()
             df_dict = {'Location':location, 'Link':link, 'Experience':exp,'Skills':skills,'Company Name':companyname,"summary":summary,"job_title":jtitle,"page_url":page_url}
             print(df_dict)
-            exit()
+            # exit()
         
 if __name__ == '__main__':
     scraper()
