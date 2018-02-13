@@ -21,17 +21,15 @@ def scraper():
         print(page_url)
         res = requests.get(page_url,headers=HEADERS,verify=False)
         soupobj = BeautifulSoup(res.text)
-        links = soupobj.find("div", class_="tab-content")
-        links = links.find("ul", class_="ullilist")
-        # jjkl
-        for i in links:
-            jtitle=i.find("div",class_="joblnk serachjoblnk").find("div",class_="jtitle").getText().strip()
-            link=i.find("div",class_="joblnk serachjoblnk").find("div",class_="jtitle").find("a",class_="title_in")['href']
-            companyname=i.find("div",class_="joblnk serachjoblnk").find("div",class_="jtxt orange").getText().strip()
-            location=i.find("div",class_="joblnk serachjoblnk").find("div",class_="jtxt jico ico1").getText().strip()
-            exp=i.find("div",class_="joblnk serachjoblnk").find("div",class_="jtxt jico ico2").getText().strip()
-            skills=i.find("div",class_="joblnk serachjoblnk").find_all("span",class_="black")[0].previous_element.getText().strip()
-            summary=i.find("div",class_="joblnk serachjoblnk").find_all("span",class_="black")[1].previous_element.getText().strip()
+        links = soupobj.find("div", class_="tab-content").find("ul", class_="ullilist")
+        for tag in links:
+            jtitle=tag.find("div",class_="joblnk serachjoblnk").find("div",class_="jtitle").getText().strip()
+            link=tag.find("div",class_="joblnk serachjoblnk").find("div",class_="jtitle").find("a",class_="title_in")['href']
+            companyname=tag.find("div",class_="joblnk serachjoblnk").find("div",class_="jtxt orange").getText().strip()
+            location=tag.find("div",class_="joblnk serachjoblnk").find("div",class_="jtxt jico ico1").getText().strip()
+            exp=tag.find("div",class_="joblnk serachjoblnk").find("div",class_="jtxt jico ico2").getText().strip()
+            skills=tag.find("div",class_="joblnk serachjoblnk").find_all("span",class_="black")[0].previous_element.getText().strip()
+            summary=tag.find("div",class_="joblnk serachjoblnk").find_all("span",class_="black")[1].previous_element.getText().strip()
             df_dict = {'Location':location, 'Link':link, 'Experience':exp,'Skills':skills,'Company Name':companyname,"summary":summary,"job_title":jtitle,"page_url":page_url}
             print(df_dict)
             # exit()
