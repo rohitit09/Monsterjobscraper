@@ -23,6 +23,7 @@ def scraper():
         soupobj = BeautifulSoup(res.text)
         links = soupobj.find("div", class_="tab-content")
         links = links.find("ul", class_="ullilist")
+        # jjkl
         for i in links:
             jtitle=i.find("div",class_="joblnk serachjoblnk").find("div",class_="jtitle").getText().strip()
             link=i.find("div",class_="joblnk serachjoblnk").find("div",class_="jtitle").find("a",class_="title_in")['href']
